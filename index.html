@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tiny Arms — a micro-game party for a T-rex with big dreams</title>
+  <meta name="description" content="Tiny Arms is a fast, funny browser game: help a T-rex with very short arms clap, high-five, catch snacks, take selfies, dodge meteors and blow out birthday candles." />
+  <meta name="theme-color" content="#F3ECDF" />
+  <meta name="author" content="Mahyad Mirzabagheri" />
+  <meta property="og:title" content="Tiny Arms" />
+  <meta property="og:description" content="Big dreams. Very short reach. A micro-game party for a T-rex." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/screenshot-title.png" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Tiny Arms home">
+        <img src="favicon.svg" alt="" width="34" height="34" />
+        <span>Tiny Arms</span>
+      </a>
+      <div class="top-actions">
+        <button class="icon-btn" id="btn-pause" type="button" aria-label="Pause game" title="Pause (P)" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-sound" type="button" aria-label="Mute sound" title="Sound (M)">
+          <svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage-wrap" id="stage-wrap">
+      <canvas id="stage" role="img" aria-label="Tiny Arms game area"></canvas>
+
+      <div class="hud" id="hud" hidden>
+        <div class="hud-left">
+          <div class="pill"><span class="pill-label">Score</span><strong id="hud-score">0</strong></div>
+          <div class="pill pill-speed" id="hud-speed">1.0×</div>
+        </div>
+        <div class="pill hud-lives" id="hud-lives" aria-label="Lives"></div>
+        <div class="timer" id="timer"><div class="timer-fill" id="timer-fill"></div></div>
+      </div>
+
+      <!-- Title -->
+      <section class="overlay overlay-title" id="screen-title" aria-labelledby="title-h">
+        <div class="card">
+          <p class="eyebrow">A micro-game party</p>
+          <h1 id="title-h">Tiny<br /><span>Arms</span></h1>
+          <p class="lead">A T-rex with big dreams and a very short reach. Clap, catch, dodge and high-five your way through five-second challenges that keep getting faster.</p>
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button" data-action="play" data-autofocus>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play
+            </button>
+            <button class="btn btn-ghost" type="button" data-action="help">How to play</button>
+          </div>
+          <p class="best" id="title-best"></p>
+        </div>
+      </section>
+
+      <!-- How to play -->
+      <section class="overlay" id="screen-help" hidden aria-labelledby="help-h">
+        <div class="card card-wide">
+          <p class="eyebrow">How to play</p>
+          <h2 id="help-h">Six tiny problems. One tiny-armed hero.</h2>
+          <p class="muted">Each challenge lasts a few seconds. Read the command, react fast. Miss four and it's extinction.</p>
+          <ul class="games">
+            <li><span class="g-ico">👏</span><b>Clap!</b><small>Tap as fast as you can</small></li>
+            <li><span class="g-ico">✋</span><b>High five!</b><small>Tap when your friend is in reach</small></li>
+            <li><span class="g-ico">🍩</span><b>Catch!</b><small>Move under the snack</small></li>
+            <li><span class="g-ico">📸</span><b>Selfie!</b><small>Tap when your face is framed</small></li>
+            <li><span class="g-ico">☄️</span><b>Dodge!</b><small>Stay out of the shadows</small></li>
+            <li><span class="g-ico">🎂</span><b>Blow!</b><small>Hold, then release in the green</small></li>
+          </ul>
+          <div class="controls">
+            <div><kbd>Space</kbd> or <kbd>Tap</kbd> action / hold</div>
+            <div><kbd>←</kbd><kbd>→</kbd> or <kbd>Drag</kbd> move</div>
+            <div><kbd>P</kbd> pause · <kbd>M</kbd> mute</div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button" data-action="play" data-autofocus>Let's go</button>
+            <button class="btn btn-ghost" type="button" data-action="menu">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pause -->
+      <section class="overlay" id="screen-pause" hidden aria-labelledby="pause-h">
+        <div class="card card-center">
+          <p class="eyebrow">Paused</p>
+          <h2 id="pause-h">Taking a tiny break</h2>
+          <div class="btn-row center">
+            <button class="btn btn-primary" type="button" data-action="resume" data-autofocus>Resume</button>
+            <button class="btn btn-ghost" type="button" data-action="menu">Quit to menu</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Game over -->
+      <section class="overlay" id="screen-over" hidden aria-labelledby="over-h">
+        <div class="card card-center">
+          <p class="eyebrow" id="over-h">Extinct!</p>
+          <div class="final-score" id="over-score">0</div>
+          <p class="rank" id="over-rank">Fresh Hatchling</p>
+          <p class="muted" id="over-best"></p>
+          <div class="btn-row center">
+            <button class="btn btn-primary" type="button" data-action="play" data-autofocus>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.6 4.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M4 4.5v5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Play again
+            </button>
+            <button class="btn btn-ghost" type="button" data-action="share">Share score</button>
+            <button class="btn btn-ghost" type="button" data-action="menu">Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer class="foot">
+      <span>Made by <a href="https://mahyadmi.github.io" target="_blank" rel="noopener">Mahyad Mirzabagheri</a></span>
+      <span class="dot">·</span>
+      <a href="https://github.com/Mahyadmi/tiny-arms" target="_blank" rel="noopener">Source on GitHub</a>
+      <span class="rotate-hint">· Rotate your phone for a bigger stage</span>
+    </footer>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
