@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Tiny Arms — a micro-game party for a T-rex with big dreams</title>
-  <meta name="description" content="Tiny Arms is a fast, funny browser game: help a T-rex with very short arms clap, high-five, catch snacks, take selfies, dodge meteors and blow out birthday candles." />
+  <meta name="description" content="Tiny Arms is a fast, funny browser game: help a T-rex with very short arms clap, high-five, jump, balance, brush its teeth and roar through 12 micro-games across five worlds." />
   <meta name="theme-color" content="#F3ECDF" />
   <meta name="author" content="Mahyad Mirzabagheri" />
   <meta property="og:title" content="Tiny Arms" />
@@ -52,7 +52,7 @@
         <div class="card">
           <p class="eyebrow">A micro-game party</p>
           <h1 id="title-h">Tiny<br /><span>Arms</span></h1>
-          <p class="lead">A T-rex with big dreams and a very short reach. Clap, catch, dodge and high-five your way through five-second challenges that keep getting faster.</p>
+          <p class="lead">A T-rex with big dreams and a very short reach. Clap, catch, jump and roar through 12 five-second challenges across five worlds that keep getting faster.</p>
           <div class="btn-row">
             <button class="btn btn-primary" type="button" data-action="play" data-autofocus>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>Play
@@ -67,15 +67,21 @@
       <section class="overlay" id="screen-help" hidden aria-labelledby="help-h">
         <div class="card card-wide">
           <p class="eyebrow">How to play</p>
-          <h2 id="help-h">Six tiny problems. One tiny-armed hero.</h2>
-          <p class="muted">Each challenge lasts a few seconds. Read the command, react fast. Miss four and it's extinction.</p>
+          <h2 id="help-h">Twelve tiny problems. One tiny-armed hero.</h2>
+          <p class="muted">Read the command and react fast. Every 5 wins unlocks a new world, a bit more speed and a bonus egg. Lose all four eggs and it's extinction.</p>
           <ul class="games">
             <li><span class="g-ico">👏</span><b>Clap!</b><small>Tap as fast as you can</small></li>
-            <li><span class="g-ico">✋</span><b>High five!</b><small>Tap when your friend is in reach</small></li>
+            <li><span class="g-ico">✋</span><b>High five!</b><small>Tap when the pterodactyl is in reach</small></li>
             <li><span class="g-ico">🍩</span><b>Catch!</b><small>Move under the snack</small></li>
             <li><span class="g-ico">📸</span><b>Selfie!</b><small>Tap when your face is framed</small></li>
             <li><span class="g-ico">☄️</span><b>Dodge!</b><small>Stay out of the shadows</small></li>
             <li><span class="g-ico">🎂</span><b>Blow!</b><small>Hold, then release in the green</small></li>
+            <li><span class="g-ico">🪨</span><b>Jump!</b><small>Hop over the boulder</small></li>
+            <li><span class="g-ico">⚖️</span><b>Balance!</b><small>Lean to stay on the ball</small></li>
+            <li><span class="g-ico">🥚</span><b>Drop!</b><small>Drop the egg into the nest</small></li>
+            <li><span class="g-ico">🪥</span><b>Brush!</b><small>Scrub left and right, fast</small></li>
+            <li><span class="g-ico">🎈</span><b>Stomp!</b><small>Pop every balloon</small></li>
+            <li><span class="g-ico">🦖</span><b>Roar!</b><small>Scare the thief, not the baby</small></li>
           </ul>
           <div class="controls">
             <div><kbd>Space</kbd> or <kbd>Tap</kbd> action / hold</div>
@@ -107,6 +113,7 @@
           <p class="eyebrow" id="over-h">Extinct!</p>
           <div class="final-score" id="over-score">0</div>
           <p class="rank" id="over-rank">Fresh Hatchling</p>
+          <p class="muted level-line" id="over-level"></p>
           <p class="muted" id="over-best"></p>
           <div class="btn-row center">
             <button class="btn btn-primary" type="button" data-action="play" data-autofocus>
